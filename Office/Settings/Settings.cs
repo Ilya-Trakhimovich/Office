@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Office
 {
-    internal static class SettingClass
+    internal static class Settings
     {
-        public static string SetEmployeeName()
+        public static string SetName(string instance)
         {
             bool flag = true;
             string empName = default;
 
             while (flag)
             {
-                Console.Write("Enter employee name: ");
+                Console.Write($"Enter {instance} name: ");
 
                 empName = Console.ReadLine();
 
@@ -29,25 +29,7 @@ namespace Office
 
             return empName;
         }
-
-        //TODO: checking input parametr
-        public static int SetSalary(DateTime employmentDate)
-        {
-            int salary = default;
-            int expirience = DateTime.Now.Year - employmentDate.Year;
-
-            if (expirience < 5)
-            {
-                salary = expirience * 20 + 20;
-            }
-            else
-            {
-                salary = expirience * 30;
-            }
-
-            return salary;        
-        }
-
+          
         public static string SetPhoneNumber()
         {
             string phoneNumber = "+375-29-";
@@ -85,6 +67,19 @@ namespace Office
             }
 
             return employmentDate;
+        }
+
+        public static void DisplayDepartment(Department dep)
+        {
+            if (dep != null)
+            {
+                Console.WriteLine(dep.Chief?.Name);
+
+                foreach (var emp in dep.listOfEmployees)
+                {
+                    Console.WriteLine($"{emp?.Name}\n\n");
+                }
+            }
         }
     }
 }
