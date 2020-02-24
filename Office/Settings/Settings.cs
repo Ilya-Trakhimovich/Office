@@ -17,7 +17,7 @@ namespace Office
 
                 empName = Console.ReadLine();
 
-                if (!(string.IsNullOrEmpty(empName) && string.IsNullOrWhiteSpace(empName)))
+                if (!(string.IsNullOrEmpty(empName) || string.IsNullOrWhiteSpace(empName)))
                 {
                     flag = false;
                 }
@@ -29,14 +29,49 @@ namespace Office
 
             return empName;
         }
-          
+
+        public static string SetPosition()
+        {
+            Random rnd = new Random();
+            string alphabet = "qwertyuiopasdfghjklzxcvbnm".ToUpper();
+            string uniquePosition = default;
+
+            for (var i = 0; i< 3; i++)
+            {
+                int letter = rnd.Next(0, 26);
+                uniquePosition += alphabet[letter];
+            }
+
+            return uniquePosition;
+        }
+
+        public static string GetPosition()
+        {
+            bool flag = true;
+            string position = default;
+
+            while (flag)
+            {
+                Console.Write("Enter employee position: ");
+
+                position = Console.ReadLine();
+                bool isCorrectPosition = string.IsNullOrEmpty(position) || string.IsNullOrWhiteSpace(position);
+
+                if (!isCorrectPosition)
+                {
+                    flag = false;
+                }
+            }
+
+            return position;
+        }
         public static string SetPhoneNumber()
         {
             string phoneNumber = "+375-29-";
 
             Random rnd = new Random();
 
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < 7; i++)
             {
                 phoneNumber += rnd.Next(0, 9);
             }
@@ -73,13 +108,15 @@ namespace Office
         {
             if (dep != null)
             {
-                Console.WriteLine(dep.Chief?.Name);
+                Console.WriteLine($"{dep.Chief?.Name} {dep.Chief?.Position}");
 
                 foreach (var emp in dep.listOfEmployees)
                 {
-                    Console.WriteLine($"{emp?.Name}\n\n");
+                    Console.WriteLine($"{emp?.Name} {emp?.Position}");
                 }
             }
+
+            Console.WriteLine();
         }
     }
 }

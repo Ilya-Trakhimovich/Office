@@ -36,6 +36,7 @@ namespace Office
             if (isChief)
             {
                 Console.WriteLine("Error. The department has chief. The chief should be alone.");
+                Console.ReadKey();
             }
             else
             {
@@ -44,18 +45,52 @@ namespace Office
             }
         }
 
-        public void DisplayInformation()
+        public void DismissEmployee()
+        {
+            if (CheckOnEmptyDepartment())
+            {
+                string name = Settings.SetName("employee");
+                string position = Settings.GetPosition();
+
+                if (Chief?.Name == name && Chief.Position == position)
+                {
+                    Chief = null;
+                    isChief = false;
+                }
+
+                if (listOfEmployees.Count != 0)
+                {
+                    for (var i = 0; i < listOfEmployees.Count; i++)
+                    {
+                        if (listOfEmployees[i]?.Name == name && listOfEmployees[i]?.Position == position)
+                        {
+                            listOfEmployees[i] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        private bool CheckOnEmptyDepartment()
         {
             if (Chief == null && listOfEmployees.Count == 0)
             {
                 Console.WriteLine("The department hasnt employees.\n");
                 Console.ReadKey();
+
+                return false;
             }
-            else
+
+            return true;
+        }
+
+        public void DisplayInformation()
+        {
+            if (CheckOnEmptyDepartment())
             {
                 string name = Settings.SetName("employee");
 
-                if (this.Chief?.Name == name)
+                if (Chief?.Name == name)
                 {
                     Chief.DisplayInformation();
                 }
@@ -64,7 +99,7 @@ namespace Office
                 {
                     foreach (var emp in listOfEmployees)
                     {
-                        if (emp.Name == name)
+                        if (emp?.Name == name)
                         {
                             emp.DisplayInformation();
                         }

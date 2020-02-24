@@ -10,10 +10,11 @@ namespace Office
         {
             Name = Settings.SetName("employee");
             PhoneNumber = Settings.SetPhoneNumber();
-            Position = "Hourly employee";
+            Position = Settings.SetPosition();
+            GetSalary();
         }
 
-        public override void GetSalary()
+        protected override void GetSalary()
         {
             Random rnd = new Random();
 

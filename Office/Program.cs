@@ -37,6 +37,8 @@ namespace Office
                         }
                     case ActionMenu.DismissEmployee:
                         {
+                            department.DismissEmployee();
+
                             break;
                         }
                     case ActionMenu.DisplayInformation:
@@ -50,12 +52,8 @@ namespace Office
                             Environment.Exit(0);
                             break;
                         }
-
-
                 }
             }
-
-
         }
     }
 }

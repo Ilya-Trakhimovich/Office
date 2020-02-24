@@ -11,10 +11,11 @@ namespace Office
             Name = Settings.SetName("employee");
             EmploymentDate = Settings.SetEmploymentDate();
             PhoneNumber = Settings.SetPhoneNumber();
-            Position = "Salared employee";
+            Position = Settings.SetPosition();
+            GetSalary();
         }        
 
-        public override void GetSalary()
+        protected override void GetSalary()
         {
             int expirience = DateTime.Now.Year - this.EmploymentDate.Year;
 
